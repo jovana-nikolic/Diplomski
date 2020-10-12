@@ -1,0 +1,12 @@
+D:\Diplomski rad aplikacija\WebAPI\Baza\obj\Debug\Baza.csprojAssemblyReference.cache
+D:\Diplomski rad aplikacija\WebAPI\Baza\obj\Debug\Baza.csproj.CoreCompileInputs.cache
+D:\Diplomski rad aplikacija\WebAPI\Baza\bin\Debug\Baza.dll.config
+D:\Diplomski rad aplikacija\WebAPI\Baza\bin\Debug\Baza.dll
+D:\Diplomski rad aplikacija\WebAPI\Baza\bin\Debug\Baza.pdb
+D:\Diplomski rad aplikacija\WebAPI\Baza\bin\Debug\EntityFramework.dll
+D:\Diplomski rad aplikacija\WebAPI\Baza\bin\Debug\EntityFramework.SqlServer.dll
+D:\Diplomski rad aplikacija\WebAPI\Baza\bin\Debug\EntityFramework.xml
+D:\Diplomski rad aplikacija\WebAPI\Baza\bin\Debug\EntityFramework.SqlServer.xml
+D:\Diplomski rad aplikacija\WebAPI\Baza\obj\Debug\Baza.csproj.CopyComplete
+D:\Diplomski rad aplikacija\WebAPI\Baza\obj\Debug\Baza.dll
+D:\Diplomski rad aplikacija\WebAPI\Baza\obj\Debug\Baza.pdb

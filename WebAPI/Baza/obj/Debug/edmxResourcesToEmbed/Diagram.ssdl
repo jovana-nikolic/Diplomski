@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BAZAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="LAB_SPECIFICNA">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="vremeOd" Type="datetime" />
+    <Property Name="vremeDo" Type="datetime" />
+    <Property Name="redosled" Type="int" />
+    <Property Name="Id_Lab_vezbe" Type="int" />
+  </EntityType>
+  <EntityType Name="LAB_VEZBA">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tag" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="naziv" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="RASPORED">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="student" Type="int" />
+    <Property Name="lab_vezba" Type="int" />
+    <Property Name="pocetak_laba" Type="datetime" />
+    <Property Name="zavrsetak_laba" Type="datetime" />
+  </EntityType>
+  <EntityType Name="STUDENT">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ime" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="prezime" Type="varchar" MaxLength="255" />
+    <Property Name="indeks" Type="int" />
+  </EntityType>
+  <Association Name="FK_LAB_SPECIFICNA_LAB_VEZBA">
+    <End Role="LAB_VEZBA" Type="Self.LAB_VEZBA" Multiplicity="0..1" />
+    <End Role="LAB_SPECIFICNA" Type="Self.LAB_SPECIFICNA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LAB_VEZBA">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="LAB_SPECIFICNA">
+        <PropertyRef Name="Id_Lab_vezbe" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RASPORED_LAB_SPECIFICNA">
+    <End Role="LAB_SPECIFICNA" Type="Self.LAB_SPECIFICNA" Multiplicity="0..1" />
+    <End Role="RASPORED" Type="Self.RASPORED" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LAB_SPECIFICNA">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="RASPORED">
+        <PropertyRef Name="lab_vezba" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RASPORED_STUDENT">
+    <End Role="STUDENT" Type="Self.STUDENT" Multiplicity="0..1" />
+    <End Role="RASPORED" Type="Self.RASPORED" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="STUDENT">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="RASPORED">
+        <PropertyRef Name="student" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BAZAModelStoreContainer">
+    <EntitySet Name="LAB_SPECIFICNA" EntityType="Self.LAB_SPECIFICNA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LAB_VEZBA" EntityType="Self.LAB_VEZBA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RASPORED" EntityType="Self.RASPORED" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="STUDENT" EntityType="Self.STUDENT" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_LAB_SPECIFICNA_LAB_VEZBA" Association="Self.FK_LAB_SPECIFICNA_LAB_VEZBA">
+      <End Role="LAB_VEZBA" EntitySet="LAB_VEZBA" />
+      <End Role="LAB_SPECIFICNA" EntitySet="LAB_SPECIFICNA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RASPORED_LAB_SPECIFICNA" Association="Self.FK_RASPORED_LAB_SPECIFICNA">
+      <End Role="LAB_SPECIFICNA" EntitySet="LAB_SPECIFICNA" />
+      <End Role="RASPORED" EntitySet="RASPORED" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RASPORED_STUDENT" Association="Self.FK_RASPORED_STUDENT">
+      <End Role="STUDENT" EntitySet="STUDENT" />
+      <End Role="RASPORED" EntitySet="RASPORED" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

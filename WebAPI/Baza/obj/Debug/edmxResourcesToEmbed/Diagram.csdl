@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BAZAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="LAB_SPECIFICNA">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="vremeOd" Type="DateTime" Precision="3" />
+    <Property Name="vremeDo" Type="DateTime" Precision="3" />
+    <Property Name="redosled" Type="Int32" />
+    <Property Name="Id_Lab_vezbe" Type="Int32" />
+    <NavigationProperty Name="LAB_VEZBA" Relationship="Self.FK_LAB_SPECIFICNA_LAB_VEZBA" FromRole="LAB_SPECIFICNA" ToRole="LAB_VEZBA" />
+    <NavigationProperty Name="RASPOREDs" Relationship="Self.FK_RASPORED_LAB_SPECIFICNA" FromRole="LAB_SPECIFICNA" ToRole="RASPORED" />
+  </EntityType>
+  <EntityType Name="LAB_VEZBA">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tag" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="naziv" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="LAB_SPECIFICNA" Relationship="Self.FK_LAB_SPECIFICNA_LAB_VEZBA" FromRole="LAB_VEZBA" ToRole="LAB_SPECIFICNA" />
+  </EntityType>
+  <EntityType Name="RASPORED">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="student" Type="Int32" />
+    <Property Name="lab_vezba" Type="Int32" />
+    <Property Name="pocetak_laba" Type="DateTime" Precision="3" />
+    <Property Name="zavrsetak_laba" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="LAB_SPECIFICNA" Relationship="Self.FK_RASPORED_LAB_SPECIFICNA" FromRole="RASPORED" ToRole="LAB_SPECIFICNA" />
+    <NavigationProperty Name="STUDENT1" Relationship="Self.FK_RASPORED_STUDENT" FromRole="RASPORED" ToRole="STUDENT" />
+  </EntityType>
+  <EntityType Name="STUDENT">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ime" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="prezime" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="indeks" Type="Int32" />
+    <NavigationProperty Name="RASPOREDs" Relationship="Self.FK_RASPORED_STUDENT" FromRole="STUDENT" ToRole="RASPORED" />
+  </EntityType>
+  <Association Name="FK_LAB_SPECIFICNA_LAB_VEZBA">
+    <End Role="LAB_VEZBA" Type="Self.LAB_VEZBA" Multiplicity="0..1" />
+    <End Role="LAB_SPECIFICNA" Type="Self.LAB_SPECIFICNA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LAB_VEZBA">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="LAB_SPECIFICNA">
+        <PropertyRef Name="Id_Lab_vezbe" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RASPORED_LAB_SPECIFICNA">
+    <End Role="LAB_SPECIFICNA" Type="Self.LAB_SPECIFICNA" Multiplicity="0..1" />
+    <End Role="RASPORED" Type="Self.RASPORED" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LAB_SPECIFICNA">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="RASPORED">
+        <PropertyRef Name="lab_vezba" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RASPORED_STUDENT">
+    <End Role="STUDENT" Type="Self.STUDENT" Multiplicity="0..1" />
+    <End Role="RASPORED" Type="Self.RASPORED" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="STUDENT">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="RASPORED">
+        <PropertyRef Name="student" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BAZAEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="LAB_SPECIFICNA" EntityType="Self.LAB_SPECIFICNA" />
+    <EntitySet Name="LAB_VEZBA" EntityType="Self.LAB_VEZBA" />
+    <EntitySet Name="RASPOREDs" EntityType="Self.RASPORED" />
+    <EntitySet Name="STUDENTs" EntityType="Self.STUDENT" />
+    <AssociationSet Name="FK_LAB_SPECIFICNA_LAB_VEZBA" Association="Self.FK_LAB_SPECIFICNA_LAB_VEZBA">
+      <End Role="LAB_VEZBA" EntitySet="LAB_VEZBA" />
+      <End Role="LAB_SPECIFICNA" EntitySet="LAB_SPECIFICNA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RASPORED_LAB_SPECIFICNA" Association="Self.FK_RASPORED_LAB_SPECIFICNA">
+      <End Role="LAB_SPECIFICNA" EntitySet="LAB_SPECIFICNA" />
+      <End Role="RASPORED" EntitySet="RASPOREDs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RASPORED_STUDENT" Association="Self.FK_RASPORED_STUDENT">
+      <End Role="STUDENT" EntitySet="STUDENTs" />
+      <End Role="RASPORED" EntitySet="RASPOREDs" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

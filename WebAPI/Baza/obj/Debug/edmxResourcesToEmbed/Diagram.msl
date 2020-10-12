@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="BAZAModelStoreContainer" CdmEntityContainer="BAZAEntities">
+    <EntitySetMapping Name="LAB_SPECIFICNA">
+      <EntityTypeMapping TypeName="BAZAModel.LAB_SPECIFICNA">
+        <MappingFragment StoreEntitySet="LAB_SPECIFICNA">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="vremeOd" ColumnName="vremeOd" />
+          <ScalarProperty Name="vremeDo" ColumnName="vremeDo" />
+          <ScalarProperty Name="redosled" ColumnName="redosled" />
+          <ScalarProperty Name="Id_Lab_vezbe" ColumnName="Id_Lab_vezbe" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LAB_VEZBA">
+      <EntityTypeMapping TypeName="BAZAModel.LAB_VEZBA">
+        <MappingFragment StoreEntitySet="LAB_VEZBA">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="tag" ColumnName="tag" />
+          <ScalarProperty Name="naziv" ColumnName="naziv" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RASPOREDs">
+      <EntityTypeMapping TypeName="BAZAModel.RASPORED">
+        <MappingFragment StoreEntitySet="RASPORED">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="student" ColumnName="student" />
+          <ScalarProperty Name="lab_vezba" ColumnName="lab_vezba" />
+          <ScalarProperty Name="pocetak_laba" ColumnName="pocetak_laba" />
+          <ScalarProperty Name="zavrsetak_laba" ColumnName="zavrsetak_laba" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="STUDENTs">
+      <EntityTypeMapping TypeName="BAZAModel.STUDENT">
+        <MappingFragment StoreEntitySet="STUDENT">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ime" ColumnName="ime" />
+          <ScalarProperty Name="prezime" ColumnName="prezime" />
+          <ScalarProperty Name="indeks" ColumnName="indeks" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
